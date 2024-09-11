@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://crmstv1xc4q4x"]
+
+[ext_resource type="Texture2D" uid="uid://qmxy3vgajvjg" path="res://Assets/sprites/FX/bullet/bullet1.png" id="1_o10y5"]
+[ext_resource type="Script" path="res://Scenes/laser.gd" id="1_u37pn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vm7ii"]
+radius = 3.0
+height = 10.0
+
+[node name="Laser" type="Area2D"]
+collision_layer = 4
+collision_mask = 10
+script = ExtResource("1_u37pn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_o10y5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, -8.34894e-15)
+rotation = 1.5708
+scale = Vector2(0.8, 0.8)
+shape = SubResource("CapsuleShape2D_vm7ii")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

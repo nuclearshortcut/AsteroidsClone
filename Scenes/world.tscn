@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://bl5utvia080cy"]
+
+[ext_resource type="Texture2D" uid="uid://bfbfdx7vlc32v" path="res://Assets/Backgrounds/backround.png" id="1_lynfn"]
+[ext_resource type="Script" path="res://Scenes/world.gd" id="1_yyhin"]
+[ext_resource type="PackedScene" uid="uid://bsg2ts7p8tesy" path="res://Scenes/ship.tscn" id="2_fkij8"]
+[ext_resource type="PackedScene" uid="uid://bqxqqsrg1o57f" path="res://Scenes/asteroid.tscn" id="4_2excb"]
+[ext_resource type="PackedScene" uid="uid://dwm5j0cb8u7qw" path="res://Scenes/med_asteroid.tscn" id="5_62yxk"]
+[ext_resource type="PackedScene" uid="uid://wlxdf3ai0md5" path="res://Scenes/ui.tscn" id="6_c0cgk"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_yyhin")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(583, 327)
+scale = Vector2(3, 3)
+texture = ExtResource("1_lynfn")
+
+[node name="Ship" parent="." instance=ExtResource("2_fkij8")]
+position = Vector2(546, 345)
+
+[node name="Projectiles" type="Node2D" parent="."]
+
+[node name="Asteroid" parent="." instance=ExtResource("4_2excb")]
+position = Vector2(986, 377)
+
+[node name="MedAsteroid" parent="." instance=ExtResource("5_62yxk")]
+position = Vector2(216, 178)
+
+[node name="UI" parent="." instance=ExtResource("6_c0cgk")]
+
+[connection signal="blast" from="Ship" to="." method="_on_ship_blast"]
+[connection signal="kill_player" from="Asteroid" to="." method="_on_asteroid_kill_player"]
+[connection signal="spawn_med_ast" from="Asteroid" to="." method="_on_asteroid_spawn_med_ast"]
+[connection signal="spawn_small_ast" from="MedAsteroid" to="." method="_on_med_asteroid_spawn_small_ast"]
